@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 export interface FabricJSEditor {
   canvas: fabric.Canvas
   addCircle: () => void
-  addRectangle: () => void
+  addRectangle: (id: string, config: Record<string, any>) => void
   addLine: () => void
   addText: (text: string) => void
   updateText: (text: string) => void
@@ -40,11 +40,12 @@ const buildEditor = (
       })
       canvas.add(object)
     },
-    addRectangle: () => {
+    addRectangle: (id: string, config: Record<string, any> = {}) => {
       const object = new fabric.Rect({
         ...RECTANGLE,
         fill: fillColor,
-        stroke: strokeColor
+        stroke: strokeColor,
+        ...config
       })
       canvas.add(object)
     },
