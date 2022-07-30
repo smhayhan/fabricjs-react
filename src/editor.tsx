@@ -1,11 +1,12 @@
 import { fabric } from 'fabric'
 import { CIRCLE, RECTANGLE, LINE, TEXT, FILL, STROKE } from './defaultShapes'
 import { useEffect, useState } from 'react'
+import { IRectOptions } from 'fabric/fabric-impl'
 
 export interface FabricJSEditor {
   canvas: fabric.Canvas
   addCircle: () => void
-  addRectangle: (id: string, config: Record<string, any>) => void
+  addRectangle: (config?: IRectOptions) => void
   addLine: () => void
   addText: (text: string) => void
   updateText: (text: string) => void
@@ -40,7 +41,7 @@ const buildEditor = (
       })
       canvas.add(object)
     },
-    addRectangle: (id: string, config: Record<string, any> = {}) => {
+    addRectangle: (config?: IRectOptions) => {
       const object = new fabric.Rect({
         ...RECTANGLE,
         fill: fillColor,
